@@ -1,0 +1,93 @@
+filetype plugin indent on
+syntax enable
+" シンタックスハイライト
+syntax on
+set t_Co=256
+colorscheme jellybeans
+" 自動でインデントを挿入
+set autoindent
+" タブをスペースに変換
+set expandtab
+set tabstop=4
+set shiftwidth=4
+" 履歴件数
+set history=1000
+" jsonやmarkdownでダブルクォート、*が消えるのを回避
+set conceallevel=0
+" 検索語句のハイライト
+set hlsearch
+" カーソル行をハイライト。これをONにするとvimが重くなるのでコメントアウトした。
+" set cursorline
+set number
+" 括弧の後に自動でインデントを挿入
+set cindent
+" 検索時に大文字小文字無視
+set ignorecase
+" 検索語句を全て英小文字で入力した場合のみ区別を無視
+set smartcase
+" クリップボード共有(vim --version | grep clipboard で+clipboardとなっていないと使えない。-clipbordになってると無理)
+set clipboard=unnamed
+" 保存時に行末の空白を削除
+autocmd BufWritePre * :%s/\s\+$//ge
+" vimでバックスペースを有効に
+set backspace=indent,eol,start
+
+" ===============キーマップ関連===================== "
+" 入力モードでのカーソル移動
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-h> <Left>
+inoremap <C-l> <Right>
+nnoremap <C-e> <Esc>$a
+inoremap <C-e> <Esc>$a
+nnoremap ss zz
+nnoremap sa ^
+nnoremap se $
+vnoremap sa ^
+vnoremap se $
+nnoremap sl <C-w>l
+nnoremap sh <C-w>h
+"表示行単位で移動(snippet展開対策済み)
+nnoremap j gj
+onoremap j gj
+xnoremap j gj
+nnoremap k gk
+onoremap k gk
+xnoremap k gk
+nnoremap <down> gj
+nnoremap <up> gk
+" jjでエスケープ
+inoremap <silent> jj <ESC>
+" 日本語入力で”っj”と入力してもEnterキーで確定させればインサートモードを抜ける
+inoremap <silent> っj <ESC>
+" 入力モード中:wqと打つとノーマルモードに戻って:wqになる
+inoremap :wq <ESC>:wq
+inoremap :w <ESC>:w
+inoremap :q <ESC>:q
+" 閉じかっこをENTERと同時に挿入
+inoremap {<Enter> {}<Left><CR><ESC><S-o>
+inoremap [<Enter> []<Left><CR><ESC><S-o>
+inoremap (<Enter> ()<Left><CR><ESC><S-o>
+" 削除した際ヤンクしないように
+nnoremap x "_x
+nnoremap _ci "_ci
+nnoremap _D "_D
+nnoremap _dd "_dd
+vnoremap _d "_d
+" タブ移動のショートカット
+nnoremap <C-l> <ESC>gt
+nnoremap <C-h> <ESC>g<S-t>
+" 画面分割時の移動のショートカット
+nnoremap <C-k> <ESC><C-w>k
+nnoremap <C-j> <ESC><C-w>j
+" pasteモード(,iでもペーストモードへ)
+nnoremap ,i :<C-u>set paste<Return>i
+autocmd InsertLeave * set nopaste
+" ESCを二回押すことでハイライトを消す
+nmap <silent> <Esc><Esc> :nohlsearch<CR>
+" Yで末尾までコピー
+nnoremap <S-y> <C-v>$y
+" syで単語コピー
+nnoremap sy byw
+" swpファイルを作成しない
+set noswapfile
