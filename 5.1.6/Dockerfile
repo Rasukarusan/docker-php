@@ -12,11 +12,14 @@ COPY ./dotfiles/bashrc /root/.bashrc
 RUN echo 'ZONE"=Asia/Tokyo"' > /etc/sysconfig/clock
 RUN yum -y update
 
+# Rpmdb checksum is invalid: dCDPT回避
+# https://qiita.com/skame/items/f1c755d66256b750b3e8
+RUN rpm --rebuilddb
+RUN yum install -y vim | true
+
 # ====================================================== #
 #  apache                                                #
 # ====================================================== #
-# Rpmdb checksum is invalid: dCDPT回避
-RUN rpm --rebuilddb
 RUN yum install -y httpd | true
 RUN rm -rf /etc/httpd/conf.d/welcome.conf
 RUN sed -ri '/<Directory "\/var\/www\/html">/,/<\/Directory>/s/    AllowOverride None/    AllowOverride All/' /etc/httpd/conf/httpd.conf && \
