@@ -20,3 +20,13 @@ services:
        - ./html:/var/www/html
     ports:
        - 4002:80
+
+  php-5.1.6:
+    build:
+        context: .
+        dockerfile: ./5.1.6/Dockerfile
+    container_name: php-5.1.6
+    volumes:
+       - ./html:/var/www/html
+    ports:
+       - 4003:80
