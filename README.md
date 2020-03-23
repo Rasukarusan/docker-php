@@ -1,7 +1,7 @@
 Docker-PHPs
 ====
 
-Build php container 7.3.14, 5.6.4 and 5.1.6
+Build php containers 7.3.14, 5.6.4 and 5.1.6
 
 ## Install
 
